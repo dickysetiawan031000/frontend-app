@@ -56,9 +56,12 @@ export default function EditProfilePage() {
                 ...(newPassword && { old_password: oldPassword, new_password: newPassword }),
             });
             router.push("/dashboard/profile");
-        } catch (err: any) {
-            console.error("Error updating profile:", err.message);
-            setError(err.message || "Failed to update profile");
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message)
+            } else {
+                setError("Failed to update profile")
+            }
         }
 
     };

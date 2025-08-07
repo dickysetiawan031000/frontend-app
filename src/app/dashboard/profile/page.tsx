@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getProfile } from "@/lib/api";
-import {Button} from "@/components/ui/button";
 import Link from "next/link";
 
 type User = {

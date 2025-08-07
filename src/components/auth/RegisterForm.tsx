@@ -21,8 +21,12 @@ export default function RegisterForm() {
         try {
             await register(name, email, password);
             router.push("/login"); // redirect setelah sukses
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message)
+            } else {
+                setError("Terjadi kesalahan saat registrasi");
+            }
         }
     };
 

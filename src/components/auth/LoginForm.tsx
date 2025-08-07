@@ -19,8 +19,12 @@ export default function LoginForm() {
         try {
             await login(email, password);
             router.push("/dashboard");
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message)
+            } else {
+                setError("Terjadi kesalahan saat login");
+            }
         }
     };
 

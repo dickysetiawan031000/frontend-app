@@ -30,9 +30,12 @@ export default function ItemsPage() {
         try {
             const items = await fetchItems()
             setItems(items)
-        } catch (err: any) {
-            console.error(err)
-            setError(err.message || 'Something went wrong')
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message)
+            } else {
+                setError("Terjadi kesalahan")
+            }
         } finally {
             setLoading(false)
         }
@@ -49,9 +52,14 @@ export default function ItemsPage() {
         try {
             await deleteItem(id)
             setItems(items.filter(item => item.id !== id))
-        } catch (err: any) {
-            alert(err.message || 'Gagal menghapus item')
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                alert(err.message || 'Gagal menghapus item')
+            } else {
+                alert('Gagal menghapus item')
+            }
         }
+
     }
 
     return (

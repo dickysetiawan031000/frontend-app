@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar, { SidebarMobile } from "@/components/sidebar";
-import { getProfile } from "@/lib/api"; // pastikan path ini sesuai
+import { getProfile } from "@/lib/api";
+import {useEffect, useState} from "react";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     const router = useRouter();
@@ -18,13 +18,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         getProfile(token)
             .then((user) => {
-                setUserName(user.name); // atau sesuaikan dengan struktur data yang dikembalikan
+                setUserName(user.name);
             })
             .catch((err) => {
                 console.error("Failed to fetch user profile", err);
                 router.replace("/login");
             });
-    }, []);
+    }, [router]);
 
     return (
         <div className="min-h-screen grid md:grid-cols-[250px_1fr]">

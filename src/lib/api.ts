@@ -1,4 +1,3 @@
-// src/utils/api.ts
 export interface Item {
     id: number
     name: string
@@ -109,7 +108,7 @@ export async function getProfile(token: string) {
             },
         });
         return response.data.data;
-    } catch (error) {
+    } catch {
         throw new Error("Failed to fetch profile");
     }
 }

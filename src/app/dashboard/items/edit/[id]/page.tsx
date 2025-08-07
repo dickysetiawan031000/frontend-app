@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { Item, fetchItemById, updateItem } from '@/lib/api'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import ItemForm from "@/app/dashboard/items/ItemForm";
+import {fetchItemById, Item} from "@/lib/api";
 
 export default function EditItemPage() {
     const { id } = useParams()
@@ -19,8 +19,12 @@ export default function EditItemPage() {
                 if (!id || Array.isArray(id)) throw new Error('ID tidak valid')
                 const data = await fetchItemById(Number(id))
                 setItem(data)
-            } catch (err: any) {
-                setError(err.message || 'Gagal memuat data item')
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setError(err.message)
+                } else {
+                    setError('Gagal memuat data item')
+                }
             } finally {
                 setLoading(false)
             }

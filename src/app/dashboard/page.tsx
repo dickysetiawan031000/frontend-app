@@ -1,4 +1,3 @@
-// src/app/dashboard/page.tsx
 "use client"
 
 import { useEffect, useState } from "react"
@@ -14,8 +13,12 @@ export default function DashboardPage() {
             try {
                 const items = await fetchItems()
                 setTotalItems(items.length)
-            } catch (err: any) {
-                setError(err.message || "Failed to load items")
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setError(err.message)
+                } else {
+                    setError("Terjadi kesalahan")
+                }
             } finally {
                 setLoading(false)
             }

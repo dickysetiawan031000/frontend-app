@@ -1,4 +1,3 @@
-// app/dashboard/items/ItemForm.tsx
 "use client"
 
 import { useState } from "react"
@@ -40,8 +39,12 @@ export default function ItemForm({ mode, initialData, onSubmit, onCancel }: Item
 
             const data = await res.json()
             onSubmit(data.data)
-        } catch (err: any) {
-            setError(err.message || "Terjadi kesalahan")
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message)
+            } else {
+                setError("Terjadi kesalahan")
+            }
         } finally {
             setLoading(false)
         }
