@@ -45,7 +45,7 @@ Aplikasi ini terhubung dengan backend Golang yang dikembangkan menggunakan pende
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/username/frontend-app.git
+git clone https://github.com/dickysetiawan031000/frontend-app.git
 
 cd frontend-app 
 ```
