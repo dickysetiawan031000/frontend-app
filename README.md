@@ -1,6 +1,6 @@
 # Next.js Frontend
 
-Ini adalah project frontend yang dibuat menggunakan **Next.js App Router**, **Tailwind CSS**, dan komponen dari **ShadCN UI**. Aplikasi ini dirancang sebagai bagian dari technical test untuk menampilkan data dinamis dengan autentikasi, CRUD data, dan dashboard.
+Ini adalah project frontend yang dibuat menggunakan **Next.js App Router**, **Tailwind CSS**, dan komponen dari **ShadCN UI**. Aplikasi ini dirancang untuk menampilkan data dinamis dengan autentikasi, CRUD data, dan dashboard.
 
 ## 🔧 Fitur Utama
 
