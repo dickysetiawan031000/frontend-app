@@ -32,7 +32,7 @@ export default function LoginForm() {
         <div className="flex justify-center items-center min-h-screen p-4">
             <Card className="w-full max-w-md">
                 <CardHeader>
-                    <CardTitle>Login</CardTitle>
+                    <CardTitle className={"text-2xl text-center"}>Login</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -50,6 +50,10 @@ export default function LoginForm() {
                         </Button>
                     </form>
                 </CardContent>
+                <CardContent className="text-center text-sm text-gray-500">
+                    Belum punya akun? <a href="/register" className="text-blue-600 hover:underline">Daftar sekarang</a>
+                </CardContent>
+
             </Card>
         </div>
     );

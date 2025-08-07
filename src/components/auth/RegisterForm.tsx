@@ -34,7 +34,7 @@ export default function RegisterForm() {
         <div className="flex justify-center items-center min-h-screen p-4">
             <Card className="w-full max-w-md">
                 <CardHeader>
-                    <CardTitle>Register</CardTitle>
+                    <CardTitle className={"text-2xl text-center"}>Register</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -55,6 +55,9 @@ export default function RegisterForm() {
                             Register
                         </Button>
                     </form>
+                </CardContent>
+                <CardContent className="text-center text-sm text-gray-500">
+                    Sudah punya akun? <a href="/login" className="text-blue-600 hover:underline">Login sekarang</a>
                 </CardContent>
             </Card>
         </div>
