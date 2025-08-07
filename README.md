@@ -85,5 +85,15 @@ npm run build
 npm start
 ```
 
+## ⚙️ Teknologi
+
+- Next.JS
+- React.JS
+- Tailwind CSS
+- Shadcn UI
+- Axios
+- Middleware Auth
+- Progressive Enhancement
+---
 
 © 2025 - Dicky Setiawan
