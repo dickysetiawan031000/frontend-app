@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Item } from "@/lib/api"
-import {Button} from "@/components/ui/button";
+import { Item, createItem, updateItem } from "@/lib/api"
+import { Button } from "@/components/ui/button"
 
 type ItemFormProps = {
     mode: "create" | "edit"
@@ -11,7 +11,12 @@ type ItemFormProps = {
     onCancel?: () => void
 }
 
-export default function ItemForm({ mode, initialData, onSubmit, onCancel }: ItemFormProps) {
+export default function ItemForm({
+                                     mode,
+                                     initialData,
+                                     onSubmit,
+                                     onCancel,
+                                 }: ItemFormProps) {
     const [name, setName] = useState(initialData?.name || "")
     const [description, setDescription] = useState(initialData?.description || "")
     const [price, setPrice] = useState(initialData?.price || 0)
@@ -25,20 +30,17 @@ export default function ItemForm({ mode, initialData, onSubmit, onCancel }: Item
         setError(null)
 
         try {
-            const token = localStorage.getItem("token")
-            const res = await fetch(`http://localhost:8080/api/items${mode === "edit" && initialData ? `/${initialData.id}` : ""}`, {
-                method: mode === "create" ? "POST" : "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({ name, description, price, stock }),
-            })
+            const itemData = { name, description, price, stock }
 
-            if (!res.ok) throw new Error("Gagal menyimpan item")
+            let savedItem: Item
 
-            const data = await res.json()
-            onSubmit(data.data)
+            if (mode === "edit" && initialData) {
+                savedItem = await updateItem(initialData.id, itemData)
+            } else {
+                savedItem = await createItem(itemData)
+            }
+
+            onSubmit(savedItem)
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setError(err.message)
@@ -51,7 +53,10 @@ export default function ItemForm({ mode, initialData, onSubmit, onCancel }: Item
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded max-w-md">
+        <form
+            onSubmit={handleSubmit}
+            className="space-y-4 p-4 border rounded max-w-md"
+        >
             <div>
                 <label className="block mb-1 font-semibold">Nama</label>
                 <input
@@ -62,6 +67,7 @@ export default function ItemForm({ mode, initialData, onSubmit, onCancel }: Item
                     required
                 />
             </div>
+
             <div>
                 <label className="block mb-1 font-semibold">Deskripsi</label>
                 <input
@@ -71,6 +77,7 @@ export default function ItemForm({ mode, initialData, onSubmit, onCancel }: Item
                     className="w-full p-2 border rounded"
                 />
             </div>
+
             <div>
                 <label className="block mb-1 font-semibold">Harga</label>
                 <input
@@ -81,6 +88,7 @@ export default function ItemForm({ mode, initialData, onSubmit, onCancel }: Item
                     required
                 />
             </div>
+
             <div>
                 <label className="block mb-1 font-semibold">Stok</label>
                 <input
@@ -91,24 +99,16 @@ export default function ItemForm({ mode, initialData, onSubmit, onCancel }: Item
                     required
                 />
             </div>
+
             {error && <p className="text-red-500">{error}</p>}
 
             <div className="flex gap-4">
-                <Button
-                    type="submit"
-                    disabled={loading}
-                    className="px-4 py-2 rounded hover:bg-slate-400 hover:text-slate-800 transition-colors"
-                >
+                <Button type="submit" disabled={loading}>
                     {loading ? "Menyimpan..." : mode === "create" ? "Tambah" : "Update"}
                 </Button>
 
                 {onCancel && (
-                    <Button
-                        type="button"
-                        onClick={onCancel}
-                        variant="secondary"
-                        className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
-                    >
+                    <Button type="button" onClick={onCancel} variant="secondary">
                         Batal
                     </Button>
                 )}
