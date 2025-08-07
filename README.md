@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Frontend
 
-## Getting Started
+Ini adalah project frontend yang dibuat menggunakan **Next.js App Router**, **Tailwind CSS**, dan komponen dari **ShadCN UI**. Aplikasi ini dirancang sebagai bagian dari technical test untuk menampilkan data dinamis dengan autentikasi, CRUD data, dan dashboard.
 
-First, run the development server:
+## 🔧 Fitur Utama
+
+- ✅ Login & Register dengan JWT
+- ✅ Routing dengan App Router (Next.js 15+)
+- ✅ Dashboard setelah login
+- ✅ CRUD item (Create, Read, Update, Delete)
+- ✅ Edit Profile
+- ✅ UI dinamis dengan Tailwind CSS & ShadCN
+- ✅ Proteksi halaman via middleware auth
+- ✅ Integrasi ke backend Golang (Pendekatan Clean Architecture)
+
+## 🧱 Struktur Proyek
+
+```
+src/
+├── app/
+│   ├── login/               # Halaman login
+│   ├── register/            # Halaman register
+│   ├── dashboard/           # Layout dashboard & halaman item
+│   ├── layout.tsx           # Root layout
+│   └── page.tsx             # Landing page (home)
+├── components/              # Komponen custom (Sidebar, Layout, dsb)
+├── lib/                     # Helper/utility functions
+└── styles/                  # Konfigurasi Tailwind
+```
+
+## 🌐 Deployment
+
+Frontend ini telah dideploy ke Vercel dan dapat diakses di:
+[https://frontend-app-dicky.vercel.app/](https://frontend-app-dicky.vercel.app/)
+
+## 🔗 Integration
+
+Aplikasi ini terhubung dengan backend Golang yang dikembangkan menggunakan pendekatan Clean Architecture. Komunikasi dilakukan via REST API, menggunakan endpoint dari backend lokal atau server production.
+
+🔗 Repo backend: [go-backend](https://github.com/dickysetiawan031000/go-backend)
+
+
+## 🚀 Cara Menggunakan
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/username/frontend-app.git
+
+cd frontend-app 
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+
+# atau jika menggunakan yarn
+
+yarn install
+```
+
+### 3. Setup Environment Variables
+
+Buat file `.env.local` dan tambahkan variabel berikut:
+
+notes : Disesuaikan dengan port yang berjalan pada project go-backend nya.
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8080/api
+```
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Aplikasi akan berjalan di `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 5. Build & Deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2025 - Dicky Setiawan
